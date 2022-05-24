@@ -7,9 +7,9 @@ public class BeatFrequency{
 
     public static final int SAMPLE_RATE = 16384;
 
-    public static final double[] FREQUENCIES = {400, 401, 402, 403};
-    public static final double[] UNKNOWNS    = {398, 410, 410, 400.5, 0};
-    public static final String[] VARS     = {"w", "x", "y", "z", "off"};
+    public static final double[] FREQUENCIES = {500, 501, 502, 503, 504};
+    public static final double[] UNKNOWNS    = {499, 501.5, 506, 509, 0};
+    public static final String[] VARS     = {"A", "B", "C", "D", "off"};
 
     public BeatFrequency(double frequencyA, double frequencyB){
         this.frequencyA = frequencyA;
