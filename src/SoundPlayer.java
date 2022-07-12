@@ -19,7 +19,7 @@ public class SoundPlayer implements Runnable {
         }
         BeatFrequency bf = new BeatFrequency(frequencyA, frequencyB);
         byte[] buf = bf.generateBeatFrequency(16);
-        AudioFormat af = new AudioFormat(BeatFrequency.SAMPLE_RATE, 8, 1, true, true);
+        AudioFormat af = new AudioFormat(WaveGen.SAMPLE_RATE, 8, 1, true, true);
         try {
             clip.open(af, buf, 0, buf.length);
         }
