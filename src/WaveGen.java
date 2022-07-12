@@ -24,7 +24,6 @@ public class WaveGen {
         for(int t = 0; t < squareWave.length; t++){
             squareWave[t] = (byte) (127 * amplitude * Math.pow(-1, Math.floor(2 * frequency * t / SAMPLE_RATE)));
         }
-        System.out.println(Arrays.toString(squareWave));
         return squareWave;
     }
 
