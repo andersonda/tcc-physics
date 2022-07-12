@@ -18,12 +18,19 @@ public class WaveGen {
         return sineWave;
     }
 
-    public static byte[] generateSquareWave(double frequency, double amplitude, int seconds){
-        return null; // TODO: implement
+    // TODO: phase
+    public static byte[] generateSquareWave(double frequency, double amplitude, double phase, int seconds){
+        byte[] squareWave = initializeArray(seconds);
+        for(int t = 0; t < squareWave.length; t++){
+            squareWave[t] = (byte) (127 * amplitude * Math.pow(-1, Math.floor(2 * frequency * t / SAMPLE_RATE)));
+        }
+        System.out.println(Arrays.toString(squareWave));
+        return squareWave;
     }
 
-    public static byte[] generateTriangleWave(double frequency, double amplitude, int seconds){
-        return null; // TODO: implement
+    // TODO: implement
+    public static byte[] generateTriangleWave(double frequency, double amplitude, double phase, int seconds){
+        return null;
     }
 
     private static byte[] initializeArray(int seconds){
@@ -31,7 +38,7 @@ public class WaveGen {
     }
 
     public static void main(String[] args) {
-        byte[] d = generateSineWave(400.0, 1.0, 0.0, 16);
+        byte[] d = generateSquareWave(400.0, 1.0, 0.0, 16);
         System.out.println(Arrays.toString(d));
     }
 }
