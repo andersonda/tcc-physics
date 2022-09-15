@@ -1,18 +1,14 @@
-import javafx.application.Application;
+package beat_frequency;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import javafx.scene.layout.Pane;
 
-import javax.sound.sampled.LineUnavailableException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Optional;
 
-public class BeatFrequencyApp extends Application {
+public class BeatFrequencyPane extends GridPane {
     private ComboBox<String> cbFrequencyAPicker;
     private ComboBox<String> cbFrequencyBPicker;
 
@@ -21,29 +17,18 @@ public class BeatFrequencyApp extends Application {
     private ToggleButton btnStop;
     private ToggleGroup toggle;
 
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Beat Frequency Prototype");
+    public  BeatFrequencyPane(){
         initComponents();
-
-        // set up GridPane for widgets
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(0, 10, 0, 10));
+        setHgap(10);
+        setVgap(10);
+        setPadding(new Insets(0, 10, 0, 10));
 
         // add widgets to GridPane
-        gridPane.add(cbFrequencyAPicker, 0, 0);
-        gridPane.add(lblSound, 1, 0);
-        gridPane.add(cbFrequencyBPicker, 2, 0);
-        gridPane.add(btnStart, 0, 1);
-        gridPane.add(btnStop, 2, 1);
-
-        // set up scene and show
-        Scene scene = new Scene(gridPane, 400, 200);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+        add(cbFrequencyAPicker, 0, 0);
+        add(lblSound, 1, 0);
+        add(cbFrequencyBPicker, 2, 0);
+        add(btnStart, 0, 1);
+        add(btnStop, 2, 1);
     }
 
     private void initComponents(){
@@ -96,11 +81,11 @@ public class BeatFrequencyApp extends Application {
         // create empty CB
         ComboBox<String> cb = new ComboBox<>();
         // add all known frequencies to the cb as strings
-        for(double frequency : BeatFrequency.FREQUENCIES){
+        for(double frequency : Frequencies.FREQUENCIES){
             cb.getItems().add(frequency + "");
         }
         // add all unknown frequency var names to cb
-        for(String var : BeatFrequency.VARS){
+        for(String var : Frequencies.VARS){
             cb.getItems().add(var);
         }
         return cb;
@@ -112,11 +97,7 @@ public class BeatFrequencyApp extends Application {
             return Double.parseDouble(selection);
         }
         catch(NumberFormatException e){
-            return BeatFrequency.getVariableFrequency(selection);
+            return Frequencies.getVariableFrequency(selection);
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
