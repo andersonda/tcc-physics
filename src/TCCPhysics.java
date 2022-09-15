@@ -21,6 +21,7 @@ public class TCCPhysics extends Application {
         initializeWaveAddition(tabPane);
         // add tabPane to application and display
         Scene scene = new Scene(tabPane, 500, 400);
+        scene.getStylesheets().add("styles.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
