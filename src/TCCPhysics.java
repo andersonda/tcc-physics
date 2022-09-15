@@ -20,7 +20,7 @@ public class TCCPhysics extends Application {
         initializeBeatFrequency(tabPane);
         initializeWaveAddition(tabPane);
         // add tabPane to application and display
-        Scene scene = new Scene(tabPane, 400, 200);
+        Scene scene = new Scene(tabPane, 500, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
