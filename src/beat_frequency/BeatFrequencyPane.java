@@ -62,6 +62,8 @@ public class BeatFrequencyPane extends VBox {
         lblFrequency1 = new Label("Frequency 1");
         lblFrequency2 = new Label("Frequency 2");
 
+        btnStart = new ToggleButton("Start");
+
         SoundPlayer player = new SoundPlayer();
         cbFrequency1Picker = initCB();
         cbFrequency2Picker = initCB();
@@ -77,12 +79,13 @@ public class BeatFrequencyPane extends VBox {
                     Collections.sort(cbFrequency2Picker.getItems());
                 }
         );
+
+        // TODO: bug with duplicate frequencies
+        addListenerToCB(player, cbFrequency1Picker, cbFrequency2Picker);
+        addListenerToCB(player, cbFrequency2Picker, cbFrequency1Picker);
         // select index 0 in both cbs
         cbFrequency1Picker.getSelectionModel().select(0);
         cbFrequency2Picker.getSelectionModel().select(0);
-
-
-        btnStart = new ToggleButton("Start");
 
         btnStart.selectedProperty().addListener(
                 (observable, oldToggle, newToggle) ->{
@@ -98,6 +101,24 @@ public class BeatFrequencyPane extends VBox {
                         player.stop();
                         btnStart.setText("Start");
                     }
+                }
+        );
+    }
+
+    private void addListenerToCB(SoundPlayer player, ComboBox<String> cbFrequency1Picker, ComboBox<String> cbFrequency2Picker) {
+        cbFrequency1Picker.getSelectionModel().selectedItemProperty().addListener(
+                (options, oldItem, newItem) -> {
+                    // reset the toggle button and stop playback when new frequency is selected
+                    btnStart.setSelected(false);
+                    player.stop();
+                    // remove 1's selected item from 2 (no duplicate frequencies)
+                    cbFrequency2Picker.getItems().remove(newItem);
+                    // add 1's previously selected item to 2
+                    if(oldItem != null) {
+                        cbFrequency2Picker.getItems().add(oldItem);
+                    }
+                    // sort 2
+                    Collections.sort(cbFrequency2Picker.getItems());
                 }
         );
     }
