@@ -1,4 +1,4 @@
-package beat_frequency;
+package utilities;
 
 import java.util.Arrays;
 
