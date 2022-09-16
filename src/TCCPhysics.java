@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import wave_addition.WaveAdditionPane;
 
 public class TCCPhysics extends Application {
 
@@ -20,7 +21,7 @@ public class TCCPhysics extends Application {
         initializeBeatFrequency(tabPane);
         initializeWaveAddition(tabPane);
         // add tabPane to application and display
-        Scene scene = new Scene(tabPane, 500, 400);
+        Scene scene = new Scene(tabPane, 800, 600);
         scene.getStylesheets().add("styles.css");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -35,8 +36,8 @@ public class TCCPhysics extends Application {
 
     private void initializeWaveAddition(TabPane tabPane){
         Tab t = new Tab("Wave Addition");
-        Label label = new Label("Hi, I'm the Wave Addition tab!");
-        t.setContent(label);
+        WaveAdditionPane waveAdditionPane = new WaveAdditionPane();
+        t.setContent(waveAdditionPane);
         tabPane.getTabs().add(t);
     }
 

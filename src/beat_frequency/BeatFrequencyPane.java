@@ -27,7 +27,7 @@ public class BeatFrequencyPane extends VBox {
         initComponents();
 
         this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(0, 10, 0, 10));
+        this.setPadding(new Insets(16, 16, 16, 16));
         this.getChildren().add(imageSpeaker);
 
         // hbox for controls under image
@@ -70,7 +70,6 @@ public class BeatFrequencyPane extends VBox {
         cbFrequency1Picker = initCB();
         cbFrequency2Picker = initCB();
 
-        // TODO: bug with duplicate frequencies
         addListenerToCB(cbFrequency1Picker, cbFrequency2Picker);
         addListenerToCB(cbFrequency2Picker, cbFrequency1Picker);
         // select index 0 in both cbs
