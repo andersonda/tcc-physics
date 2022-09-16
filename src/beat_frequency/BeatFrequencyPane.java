@@ -21,6 +21,8 @@ public class BeatFrequencyPane extends VBox {
     private Label lblFrequency1;
     private Label lblFrequency2;
 
+    private SoundPlayer player;
+
     public  BeatFrequencyPane(){
         initComponents();
 
@@ -64,25 +66,13 @@ public class BeatFrequencyPane extends VBox {
 
         btnStart = new ToggleButton("Start");
 
-        SoundPlayer player = new SoundPlayer();
+        player = new SoundPlayer();
         cbFrequency1Picker = initCB();
         cbFrequency2Picker = initCB();
-        cbFrequency1Picker.getSelectionModel().selectedItemProperty().addListener(
-                (options, oldItem, newItem) -> {
-                    // remove A's selected item from B (no duplicate frequencies)
-                    cbFrequency2Picker.getItems().remove(newItem);
-                    // add A's previously selected item to B
-                    if(oldItem != null) {
-                        cbFrequency2Picker.getItems().add(oldItem);
-                    }
-                    // sort B
-                    Collections.sort(cbFrequency2Picker.getItems());
-                }
-        );
 
         // TODO: bug with duplicate frequencies
-        addListenerToCB(player, cbFrequency1Picker, cbFrequency2Picker);
-        addListenerToCB(player, cbFrequency2Picker, cbFrequency1Picker);
+        addListenerToCB(cbFrequency1Picker, cbFrequency2Picker);
+        addListenerToCB(cbFrequency2Picker, cbFrequency1Picker);
         // select index 0 in both cbs
         cbFrequency1Picker.getSelectionModel().select(0);
         cbFrequency2Picker.getSelectionModel().select(0);
@@ -105,20 +95,20 @@ public class BeatFrequencyPane extends VBox {
         );
     }
 
-    private void addListenerToCB(SoundPlayer player, ComboBox<String> cbFrequency1Picker, ComboBox<String> cbFrequency2Picker) {
-        cbFrequency1Picker.getSelectionModel().selectedItemProperty().addListener(
+    private void addListenerToCB(ComboBox<String> cbFirst, ComboBox<String> cbSecond) {
+        cbFirst.getSelectionModel().selectedItemProperty().addListener(
                 (options, oldItem, newItem) -> {
                     // reset the toggle button and stop playback when new frequency is selected
                     btnStart.setSelected(false);
                     player.stop();
                     // remove 1's selected item from 2 (no duplicate frequencies)
-                    cbFrequency2Picker.getItems().remove(newItem);
+                    cbSecond.getItems().remove(newItem);
                     // add 1's previously selected item to 2
                     if(oldItem != null) {
-                        cbFrequency2Picker.getItems().add(oldItem);
+                        cbSecond.getItems().add(oldItem);
                     }
                     // sort 2
-                    Collections.sort(cbFrequency2Picker.getItems());
+                    Collections.sort(cbSecond.getItems());
                 }
         );
     }
