@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import utilities.Styling;
 
 import java.util.Collections;
 
@@ -25,32 +26,26 @@ public class BeatFrequencyPane extends VBox {
 
     public  BeatFrequencyPane(){
         initComponents();
-
-        this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(16, 16, 16, 16));
-        this.getChildren().add(imageSpeaker);
+        Styling.setDefaultStyling(this);
 
         // hbox for controls under image
         HBox hbControls = new HBox();
-        hbControls.setAlignment(Pos.CENTER);
-        hbControls.setPadding(new Insets(16, 16, 16, 16));
-        hbControls.setSpacing(16);
+        Styling.setDefaultStyling(hbControls);
 
         // vboxes for frequency pickers and their labels
         VBox vbFrequency1 = new VBox();
-        vbFrequency1.getChildren().add(lblFrequency1);
-        vbFrequency1.getChildren().add(cbFrequency1Picker);
+        vbFrequency1.getChildren().addAll(lblFrequency1, cbFrequency1Picker);
+        Styling.setDefaultStyling(vbFrequency1);
+
         VBox vbFrequency2 = new VBox();
-        vbFrequency2.getChildren().add(lblFrequency2);
-        vbFrequency2.getChildren().add(cbFrequency2Picker);
+        vbFrequency2.getChildren().addAll(lblFrequency2, cbFrequency2Picker);
+        Styling.setDefaultStyling(vbFrequency2);
 
-        // combine frequency pickers and add to overall layout
-        hbControls.getChildren().add(vbFrequency1);
-        hbControls.getChildren().add(vbFrequency2);
-        this.getChildren().add(hbControls);
+        // combine frequency pickers
+        hbControls.getChildren().addAll(vbFrequency1, vbFrequency2);
 
-        // add playback toggle
-        this.getChildren().add(btnStart);
+        // add all to vbox
+        this.getChildren().addAll(imageSpeaker, hbControls, btnStart);
     }
 
     private void initComponents(){

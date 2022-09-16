@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import wave_addition.WaveAdditionPane;
 
@@ -18,28 +19,23 @@ public class TCCPhysics extends Application {
         primaryStage.setTitle("TCC Physics Simulations");
         // initialize simulations in their tabs
         TabPane tabPane = new TabPane();
-        initializeBeatFrequency(tabPane);
-        initializeWaveAddition(tabPane);
+        Tab beatFrequency = initializeTab(new BeatFrequencyPane(), "Beat Frequency");
+        Tab waveAddition = initializeTab(new WaveAdditionPane(), "Wave Addition");
+        tabPane.getTabs().addAll(beatFrequency, waveAddition);
+
         // add tabPane to application and display
-        Scene scene = new Scene(tabPane, 800, 600);
+        Scene scene = new Scene(tabPane, 900, 800);
         scene.getStylesheets().add("styles.css");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-    private void initializeBeatFrequency(TabPane tabPane){
-        Tab t = new Tab("Beat Frequency");
-        BeatFrequencyPane  beatFrequencyPane = new BeatFrequencyPane();
-        t.setContent(beatFrequencyPane);
-        tabPane.getTabs().add(t);
+    private Tab initializeTab(Pane pane, String name){
+        Tab t = new Tab(name);
+        t.setContent(pane);
+        t.setClosable(false);
+        return t;
     }
 
-    private void initializeWaveAddition(TabPane tabPane){
-        Tab t = new Tab("Wave Addition");
-        WaveAdditionPane waveAdditionPane = new WaveAdditionPane();
-        t.setContent(waveAdditionPane);
-        tabPane.getTabs().add(t);
-    }
-
-    // TODO: other tabs for other simulations
+    // TODO: tabs for other simulations
 }

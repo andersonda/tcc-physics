@@ -7,6 +7,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import utilities.Styling;
 
 public class SineWaveSliderPane extends VBox {
 
@@ -21,9 +22,8 @@ public class SineWaveSliderPane extends VBox {
         public LabeledSlider(String name){
             lblWaveProperty = new Label(name);
             sliderWaveProperty = new Slider();
-            this.setAlignment(Pos.CENTER);
-            this.getChildren().add(lblWaveProperty);
-            this.getChildren().add(sliderWaveProperty);
+            Styling.setDefaultStyling(this);
+            this.getChildren().addAll(lblWaveProperty, sliderWaveProperty);
         }
     }
 
@@ -34,18 +34,13 @@ public class SineWaveSliderPane extends VBox {
     private LabeledSlider sliderPhaseShift;
 
     public SineWaveSliderPane(String waveName){
-        this.setAlignment(Pos.CENTER);
-        this.setSpacing(16);
-        this.setPadding(new Insets(16, 16, 16, 16));
+        Styling.setDefaultStyling(this);
         lblWaveName = new Label(waveName);
         lblWaveName.setFont(new Font("Courier New", 32));
 
         initComponents();
 
-        this.getChildren().add(lblWaveName);
-        this.getChildren().add(sliderAmplitude);
-        this.getChildren().add(sliderPeriod);
-        this.getChildren().add(sliderPhaseShift);
+        this.getChildren().addAll(lblWaveName, sliderAmplitude, sliderPeriod, sliderPhaseShift);
     }
 
     private void initComponents(){
